@@ -1,0 +1,75 @@
+[0m13:37:17.059490 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x107246a50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1072c90d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1072c9f50>]}
+
+
+============================== 13:37:17.064159 | 1def282c-c4b5-420d-93d0-0013a819af00 ==============================
+[0m13:37:17.064159 [info ] [MainThread]: Running with dbt=1.11.8
+[0m13:37:17.064859 [debug] [MainThread]: running dbt with arguments {'indirect_selection': 'eager', 'static_parser': 'True', 'partial_parse': 'True', 'fail_fast': 'False', 'empty': 'None', 'use_colors': 'True', 'warn_error': 'None', 'log_format': 'default', 'quiet': 'False', 'introspect': 'True', 'debug': 'False', 'use_experimental_parser': 'False', 'send_anonymous_usage_stats': 'True', 'printer_width': '80', 'target_path': 'None', 'profiles_dir': '/Users/jeffboerger/.dbt', 'log_path': 'logs', 'version_check': 'True', 'write_json': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'invocation_command': 'dbt init algo_trading', 'no_print': 'None', 'log_cache_events': 'False', 'cache_selected_only': 'False'}
+[0m13:37:17.087789 [debug] [MainThread]: Starter project path: /Users/jeffboerger/Dev/algo-trading-bot/venv/lib/python3.11/site-packages/dbt/include/starter_project
+[0m13:37:17.095528 [info ] [MainThread]: 
+Your new dbt project "algo_trading" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m13:37:17.096017 [info ] [MainThread]: Setting up your profile.
+[0m13:40:50.221336 [info ] [MainThread]: Profile algo_trading written to /Users/jeffboerger/.dbt/profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m13:40:50.250751 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 213.28775, "process_in_blocks": "0", "process_kernel_time": 0.587867, "process_mem_max_rss": "190238720", "process_out_blocks": "0", "process_user_time": 2.386078}
+[0m13:40:50.253231 [debug] [MainThread]: Command `dbt init` succeeded at 13:40:50.253042 after 213.29 seconds
+[0m13:40:50.254270 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10729e510>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106ef1b90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1029b2390>]}
+[0m13:40:50.255069 [debug] [MainThread]: Flushing usage events
+[0m13:40:50.506359 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m13:47:19.603120 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10584c4d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1058a0e10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1058b5dd0>]}
+
+
+============================== 13:47:19.611308 | 58fc1d2c-543a-48ba-89fe-9ef2f3eff493 ==============================
+[0m13:47:19.611308 [info ] [MainThread]: Running with dbt=1.11.8
+[0m13:47:19.611970 [debug] [MainThread]: running dbt with arguments {'invocation_command': 'dbt debug --project-dir algo-trading-bot-493914-762506da8566.json', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'debug': 'False', 'write_json': 'True', 'introspect': 'True', 'empty': 'None', 'fail_fast': 'False', 'log_cache_events': 'False', 'log_path': 'logs', 'version_check': 'True', 'profiles_dir': '/Users/jeffboerger/.dbt', 'quiet': 'False', 'send_anonymous_usage_stats': 'True', 'printer_width': '80', 'use_colors': 'True', 'cache_selected_only': 'False', 'static_parser': 'True', 'warn_error': 'None', 'partial_parse': 'True', 'indirect_selection': 'eager', 'target_path': 'None', 'use_experimental_parser': 'False', 'no_print': 'None', 'log_format': 'default'}
+[0m13:47:19.642846 [info ] [MainThread]: dbt version: 1.11.8
+[0m13:47:19.643623 [info ] [MainThread]: python version: 3.11.15
+[0m13:47:19.644501 [info ] [MainThread]: python path: /Users/jeffboerger/Dev/algo-trading-bot/venv/bin/python3.11
+[0m13:47:19.645271 [info ] [MainThread]: os info: macOS-26.4.1-x86_64-i386-64bit
+[0m13:47:21.853690 [info ] [MainThread]: Error importing adapter: No module named 'dbt.adapters.postgres'
+[0m13:47:21.856858 [info ] [MainThread]: Error importing adapter: No module named 'dbt.adapters.snowflake'
+[0m13:47:21.857390 [info ] [MainThread]: Using profiles dir at /Users/jeffboerger/.dbt
+[0m13:47:21.857779 [info ] [MainThread]: Using profiles.yml file at /Users/jeffboerger/.dbt/profiles.yml
+[0m13:47:21.858158 [info ] [MainThread]: Using dbt_project.yml file at algo-trading-bot-493914-762506da8566.json/dbt_project.yml
+[0m13:47:21.858492 [info ] [MainThread]: Configuration:
+[0m13:47:21.858766 [info ] [MainThread]:   profiles.yml file [[31mERROR invalid[0m]
+[0m13:47:21.859114 [info ] [MainThread]:   dbt_project.yml file [[31mERROR not found[0m]
+[0m13:47:21.859523 [info ] [MainThread]: Required dependencies:
+[0m13:47:21.860073 [debug] [MainThread]: Executing "git --help"
+[0m13:47:21.890724 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Reset current HEAD to the specified state\n   switch     Switch branches\n   tag        Create, list, delete or verify a tag object signed with GPG\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m13:47:21.892181 [debug] [MainThread]: STDERR: "b''"
+[0m13:47:21.892884 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m13:47:21.893414 [info ] [MainThread]: Connection test skipped since no profile was found
+[0m13:47:21.894101 [info ] [MainThread]: [31m2 checks failed:[0m
+[0m13:47:21.894465 [info ] [MainThread]: Could not load dbt_project.yml
+Profile loading failed for the following reason:
+Runtime Error
+  Credentials in profile "clinic_revenue", target "dev" invalid: Runtime Error
+    Could not find adapter type postgres!
+
+Runtime Error
+  Credentials in profile "theme_park_dbt", target "dev" invalid: Runtime Error
+    Could not find adapter type snowflake!
+
+
+[0m13:47:21.894860 [info ] [MainThread]: Project loading failed for the following reason:
+ project path <algo-trading-bot-493914-762506da8566.json/dbt_project.yml> not found
+
+[0m13:47:21.900656 [debug] [MainThread]: Resource report: {"command_name": "debug", "command_success": false, "command_wall_clock_time": 2.3881378, "process_in_blocks": "0", "process_kernel_time": 0.623461, "process_mem_max_rss": "193069056", "process_out_blocks": "0", "process_user_time": 2.434941}
+[0m13:47:21.902164 [debug] [MainThread]: Command `dbt debug` failed at 13:47:21.901927 after 2.39 seconds
+[0m13:47:21.902906 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1058a1950>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1058a1b10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x100ebdd10>]}
+[0m13:47:21.903464 [debug] [MainThread]: Flushing usage events
+[0m13:47:22.175505 [debug] [MainThread]: An error was encountered while trying to flush usage events
