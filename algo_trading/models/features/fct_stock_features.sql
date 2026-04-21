@@ -1,38 +1,54 @@
-with source as (
+with aapl as (
     select * from {{ ref('stg_aapl_daily') }}
+),
+dis as (
+    select * from {{ ref('stg_dis_daily') }}
+),
+tsla as (
+    select * from {{ ref('stg_tsla_daily') }}
+),
+combined as (
+    select * from aapl
+    union all
+    select * from dis
+    union all
+    select * from tsla
 ),
 price_changes as (
     select
         date,
+        ticker,
         close,
-        close - lag(close) over (order by date) as daily_change
-    from source
+        close - lag(close) over (partition by ticker order by date) as daily_change
+    from combined
 ),
 features as (
     select
         date,
+        ticker,
         close,
-        -- Simple Moving Average 20
         avg(close) over (
+            partition by ticker
             order by date
             rows between 19 preceding and current row
         ) as sma_20,
-        -- EMA 12 (approximated with SMA for now)
         avg(close) over (
+            partition by ticker
             order by date
             rows between 11 preceding and current row
         ) as ema_12,
-        -- EMA 26 (approximated with SMA for now)
         avg(close) over (
+            partition by ticker
             order by date
             rows between 25 preceding and current row
         ) as ema_26,
-        -- RSI 14 components
         avg(case when daily_change > 0 then daily_change else 0 end) over (
+            partition by ticker
             order by date
             rows between 13 preceding and current row
         ) as avg_gain,
         avg(case when daily_change < 0 then abs(daily_change) else 0 end) over (
+            partition by ticker
             order by date
             rows between 13 preceding and current row
         ) as avg_loss
@@ -40,6 +56,7 @@ features as (
 )
 select
     date,
+    ticker,
     close,
     sma_20,
     ema_12,
@@ -49,4 +66,4 @@ select
          else 100 - (100 / (1 + (avg_gain / avg_loss)))
     end as rsi_14
 from features
-order by date asc
+order by ticker, date asc
