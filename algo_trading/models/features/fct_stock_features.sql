@@ -1,18 +1,29 @@
-with aapl as (
-    select * from {{ ref('stg_aapl_daily') }}
-),
-dis as (
-    select * from {{ ref('stg_dis_daily') }}
-),
-tsla as (
-    select * from {{ ref('stg_tsla_daily') }}
-),
-combined as (
-    select * from aapl
+with combined as (
+    select * from {{ source('algo_trading', 'aapl_daily') }}
     union all
-    select * from dis
+    select * from {{ source('algo_trading', 'msft_daily') }}
     union all
-    select * from tsla
+    select * from {{ source('algo_trading', 'googl_daily') }}
+    union all
+    select * from {{ source('algo_trading', 'nvda_daily') }}
+    union all
+    select * from {{ source('algo_trading', 'jpm_daily') }}
+    union all
+    select * from {{ source('algo_trading', 'bac_daily') }}
+    union all
+    select * from {{ source('algo_trading', 'dis_daily') }}
+    union all
+    select * from {{ source('algo_trading', 'amzn_daily') }}
+    union all
+    select * from {{ source('algo_trading', 'wmt_daily') }}
+    union all
+    select * from {{ source('algo_trading', 'xom_daily') }}
+    union all
+    select * from {{ source('algo_trading', 'jnj_daily') }}
+    union all
+    select * from {{ source('algo_trading', 'tsla_daily') }}
+    union all
+    select * from {{ source('algo_trading', 'amd_daily') }}
 ),
 price_changes as (
     select

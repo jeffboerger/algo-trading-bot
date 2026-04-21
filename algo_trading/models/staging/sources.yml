@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: algo_trading
+    database: algo-trading-bot-493914
+    schema: algo_trading
+    tables:
+      - name: aapl_daily
+      - name: msft_daily
+      - name: googl_daily
+      - name: nvda_daily
+      - name: jpm_daily
+      - name: bac_daily
+      - name: dis_daily
+      - name: amzn_daily
+      - name: wmt_daily
+      - name: xom_daily
+      - name: jnj_daily
+      - name: tsla_daily
+      - name: amd_daily
