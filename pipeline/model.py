@@ -2,6 +2,7 @@ from google.cloud import bigquery
 from dotenv import load_dotenv
 import pandas as pd
 from xgboost import XGBClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import classification_report
 from sklearn.utils.class_weight import compute_sample_weight
@@ -22,18 +23,11 @@ def fetch_features() -> pd.DataFrame:
 
 def create_labels(df: pd.DataFrame, threshold: float = 0.01) -> pd.DataFrame:
     df = df.copy()
-    
-    # tomorrow's return based on today's close
-    df['future_return'] = df['close'].shift(-1) / df['close'] - 1
-    
-    # label based on threshold
+    df['future_return'] = df.groupby('ticker')['close'].shift(-1) / df['close'] - 1
     df['label'] = 'HOLD'
     df.loc[df['future_return'] > threshold, 'label'] = 'BUY'
     df.loc[df['future_return'] < -threshold, 'label'] = 'SELL'
-    
-    # drop the last row — no tomorrow to predict
     df = df.dropna(subset=['future_return'])
-    
     return df
 
 def split_data(df: pd.DataFrame, train_pct: float = 0.7):
@@ -42,8 +36,8 @@ def split_data(df: pd.DataFrame, train_pct: float = 0.7):
     train = df.iloc[:split_idx]
     test = df.iloc[split_idx:]
     
-    feature_cols = ['sma_20', 'ema_12', 'ema_26', 'macd', 'rsi_14', 
-                'volume_ratio', 'atr_14', 'momentum_5d', 'momentum_10d', 'bb_position']
+    feature_cols = ['sma_20', 'ema_12', 'ema_26', 'macd', 'rsi_14',
+                    'volume_ratio', 'atr_14', 'momentum_5d', 'momentum_10d', 'bb_position']
     
     X_train = train[feature_cols]
     y_train = train['label']
@@ -53,15 +47,12 @@ def split_data(df: pd.DataFrame, train_pct: float = 0.7):
     return X_train, y_train, X_test, y_test
 
 def train_model(X_train, y_train, X_test, y_test):
-    # encode string labels to numbers
     le = LabelEncoder()
     y_train_enc = le.fit_transform(y_train)
     y_test_enc = le.transform(y_test)
-
-    # compute sample weights to balance classes
+    
     sample_weights = compute_sample_weight(class_weight='balanced', y=y_train_enc)
     
-    # train XGBoost
     model = XGBClassifier(
         n_estimators=100,
         max_depth=3,
@@ -71,14 +62,36 @@ def train_model(X_train, y_train, X_test, y_test):
     
     model.fit(X_train, y_train_enc, sample_weight=sample_weights)
     
-    # evaluate
     y_pred = model.predict(X_test)
     print(classification_report(y_test_enc, y_pred, target_names=le.classes_))
     
     return model, le
 
+def train_random_forest(X_train, y_train, X_test, y_test):
+    le = LabelEncoder()
+    y_train_enc = le.fit_transform(y_train)
+    y_test_enc = le.transform(y_test)
+
+    sample_weights = compute_sample_weight(class_weight='balanced', y=y_train_enc)
+
+    model = RandomForestClassifier(
+        n_estimators=100,
+        max_depth=5,
+        random_state=42
+    )
+
+    model.fit(X_train, y_train_enc, sample_weight=sample_weights)
+
+    y_pred = model.predict(X_test)
+    print("Random Forest:")
+    print(classification_report(y_test_enc, y_pred, target_names=le.classes_))
+
+    return model, le
+
 if __name__ == "__main__":
     df = fetch_features()
-    df = create_labels(df)
+    df = create_labels(df, threshold=0.01)
     X_train, y_train, X_test, y_test = split_data(df)
-    model, le = train_model(X_train, y_train, X_test, y_test)
+    print("XGBoost:")
+    model_xgb, le = train_model(X_train, y_train, X_test, y_test)
+    model_rf, le = train_random_forest(X_train, y_train, X_test, y_test)
