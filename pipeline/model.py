@@ -42,7 +42,8 @@ def split_data(df: pd.DataFrame, train_pct: float = 0.7):
     train = df.iloc[:split_idx]
     test = df.iloc[split_idx:]
     
-    feature_cols = ['sma_20', 'ema_12', 'ema_26', 'macd', 'rsi_14']
+    feature_cols = ['sma_20', 'ema_12', 'ema_26', 'macd', 'rsi_14', 
+                'volume_ratio', 'atr_14', 'momentum_5d', 'momentum_10d', 'bb_position']
     
     X_train = train[feature_cols]
     y_train = train['label']
